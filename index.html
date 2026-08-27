@@ -104,16 +104,40 @@ textarea {
 
 
 /* =========================================================
-   COVER
+   LOCK SCREEN
+   يمنع النزول قبل فتح الدعوة
+========================================================= */
+
+html.locked,
+body.locked {
+
+    overflow: hidden !important;
+
+    height: 100% !important;
+
+    max-height: 100% !important;
+
+    overscroll-behavior: none !important;
+
+    touch-action: none !important;
+
+}
+
+
+/* =========================================================
+   COVER — FIRST SCREEN ONLY
 ========================================================= */
 
 .cover {
 
-    min-height: 100svh;
-
     width: 100%;
 
-    background: var(--cream);
+    height: 100svh;
+
+    min-height: 100svh;
+
+    background:
+        var(--cream);
 
     display: flex;
 
@@ -134,7 +158,7 @@ textarea {
 
     width: 100%;
 
-    height: 100svh;
+    height: 100%;
 
     object-fit: contain;
 
@@ -209,6 +233,17 @@ textarea {
             scale(1.05);
 
     }
+
+}
+
+
+/* =========================================================
+   INVITATION CONTENT
+========================================================= */
+
+#invitationContent {
+
+    display: none;
 
 }
 
@@ -988,6 +1023,179 @@ textarea {
 
 
 /* =========================================================
+   NO CHILDREN
+========================================================= */
+
+.no-children {
+
+    min-height: 70svh;
+
+    padding:
+        70px 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #5b0a16,
+            #31050d
+        );
+
+}
+
+
+.no-children-box {
+
+    width:
+        min(760px, 100%);
+
+    padding:
+        55px 28px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(201,162,78,0.45);
+
+    background:
+        rgba(255,255,255,0.035);
+
+    backdrop-filter:
+        blur(10px);
+
+}
+
+
+/* =========================================================
+   NO CHILDREN ICON — INTERDICTION
+========================================================= */
+
+.children-icon {
+
+    width: 90px;
+
+    height: 90px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        var(--gold-light);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color:
+        var(--gold-light);
+
+    position: relative;
+
+}
+
+
+.children-icon svg {
+
+    width: 58px;
+
+    height: 58px;
+
+}
+
+
+/* علامة المنع فوق الأيقونة */
+
+.children-icon::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 68px;
+
+    height: 68px;
+
+    border:
+        4px solid
+        #e7c77f;
+
+    border-radius: 50%;
+
+}
+
+
+.children-icon::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 76px;
+
+    height: 4px;
+
+    background:
+        #e7c77f;
+
+    border-radius: 10px;
+
+    transform:
+        rotate(-45deg);
+
+    z-index: 3;
+
+}
+
+
+.no-children-box h2 {
+
+    margin-top: 25px;
+
+    color:
+        var(--gold-light);
+
+    font-family:
+        "Cinzel",
+        serif;
+
+    font-size:
+        clamp(28px, 6vw, 46px);
+
+    line-height: 1.2;
+
+}
+
+
+.no-children-message {
+
+    margin-top: 20px;
+
+    color: white;
+
+    font-size:
+        clamp(21px, 4vw, 29px);
+
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
    RSVP
 ========================================================= */
 
@@ -1145,7 +1353,7 @@ textarea {
 
 
 /* =========================================================
-   PRESENCE CHOICES
+   PRESENCE OPTIONS
 ========================================================= */
 
 .presence-options {
@@ -1450,6 +1658,14 @@ textarea {
 
     }
 
+
+    .no-children-box {
+
+        padding:
+            45px 20px;
+
+    }
+
 }
 
 </style>
@@ -1457,7 +1673,11 @@ textarea {
 </head>
 
 
-<body>
+<!-- =========================================================
+     BODY LOCKED
+========================================================= -->
+
+<body class="locked">
 
 
 <!-- =========================================================
@@ -1478,12 +1698,13 @@ textarea {
 
 
 <!-- =========================================================
-     IMAGE 1
+     COVER
 ========================================================= -->
 
 <section
     class="cover"
     id="cover">
+
 
     <img
         class="cover-image"
@@ -1498,586 +1719,683 @@ textarea {
 
     </div>
 
-</section>
-
-
-
-<!-- =========================================================
-     IMAGE 2
-========================================================= -->
-
-<section
-    class="image-section"
-    id="message">
-
-    <img
-        src="image2.png"
-        alt="Message de bienvenue">
 
 </section>
 
 
 
 <!-- =========================================================
-     IMAGE 3 + MUSIC BUTTON
+     INVITATION CONTENT
 ========================================================= -->
 
-<section
-    class="image-section music-image-section"
-    id="calendar">
+<div
+    id="invitationContent">
 
-    <img
-        src="image3.png"
-        alt="Date de la soirée">
 
 
-    <button
-        id="musicButton"
-        class="music-button"
-        type="button"
-        aria-label="Lecture ou pause de la musique">
+    <!-- =====================================================
+         IMAGE 2
+    ====================================================== -->
 
-        ♫
+    <section
+        class="image-section"
+        id="message">
 
-    </button>
+        <img
+            src="image2.png"
+            alt="Message de bienvenue">
 
-</section>
+    </section>
 
 
 
-<!-- =========================================================
-     COUNTDOWN
-========================================================= -->
+    <!-- =====================================================
+         IMAGE 3
+    ====================================================== -->
 
-<section
-    class="countdown-section"
-    id="countdown">
-
-    <div
-        class="countdown-content">
-
-
-        <div
-            class="countdown-small">
-
-            La soirée henné de Sandra
-
-        </div>
-
-
-        <h1
-            class="countdown-title">
-
-            Le grand jour approche
-
-        </h1>
-
-
-        <div
-            class="event-date">
-
-            10 Septembre 2026 · 17:00
-
-        </div>
-
-
-
-        <div
-            class="timer">
-
-
-            <div
-                class="timer-box">
-
-                <span
-                    class="timer-number"
-                    id="days">
-
-                    00
-
-                </span>
-
-                <span
-                    class="timer-label">
-
-                    JOURS
-
-                </span>
-
-            </div>
-
-
-
-            <div
-                class="timer-box">
-
-                <span
-                    class="timer-number"
-                    id="hours">
-
-                    00
-
-                </span>
-
-                <span
-                    class="timer-label">
-
-                    HEURES
-
-                </span>
-
-            </div>
-
-
-
-            <div
-                class="timer-box">
-
-                <span
-                    class="timer-number"
-                    id="minutes">
-
-                    00
-
-                </span>
-
-                <span
-                    class="timer-label">
-
-                    MINUTES
-
-                </span>
-
-            </div>
-
-
-
-            <div
-                class="timer-box">
-
-                <span
-                    class="timer-number"
-                    id="seconds">
-
-                    00
-
-                </span>
-
-                <span
-                    class="timer-label">
-
-                    SECONDES
-
-                </span>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     VENUE
-========================================================= -->
-
-<section
-    class="venue"
-    id="venue">
-
-
-    <h2
-        class="section-title">
-
-        Le lieu de la soirée
-
-    </h2>
-
-
-    <p
-        class="section-subtitle">
-
-        Nous vous attendons à La salle Lydia Cheraga
-
-    </p>
-
-
-
-    <div
-        class="venue-card">
+    <section
+        class="image-section music-image-section"
+        id="calendar">
 
 
         <img
-            class="venue-image"
-            src="image4.png"
-            alt="La salle Lydia Cheraga">
+            src="image3.png"
+            alt="Date de la soirée">
+
+
+        <button
+            id="musicButton"
+            class="music-button"
+            type="button"
+            aria-label="Lecture ou pause de la musique">
+
+            ♫
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         COUNTDOWN
+    ====================================================== -->
+
+    <section
+        class="countdown-section"
+        id="countdown">
 
 
         <div
-            class="venue-details">
+            class="countdown-content">
 
 
             <div
-                class="venue-name">
+                class="countdown-small">
 
-                La salle Lydia
+                La soirée henné de Sandra
 
             </div>
 
 
-            <div
-                class="venue-city">
+            <h1
+                class="countdown-title">
 
-                Cheraga
+                Le grand jour approche
+
+            </h1>
+
+
+            <div
+                class="event-date">
+
+                10 Septembre 2026 · 17:00
 
             </div>
 
 
 
-            <!-- QR CODE -->
-
             <div
-                class="qr-container">
+                class="timer">
+
 
                 <div
-                    id="qrcode">
+                    class="timer-box">
+
+                    <span
+                        class="timer-number"
+                        id="days">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="timer-label">
+
+                        JOURS
+
+                    </span>
+
                 </div>
 
+
+
+                <div
+                    class="timer-box">
+
+                    <span
+                        class="timer-number"
+                        id="hours">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="timer-label">
+
+                        HEURES
+
+                    </span>
+
+                </div>
+
+
+
+                <div
+                    class="timer-box">
+
+                    <span
+                        class="timer-number"
+                        id="minutes">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="timer-label">
+
+                        MINUTES
+
+                    </span>
+
+                </div>
+
+
+
+                <div
+                    class="timer-box">
+
+                    <span
+                        class="timer-number"
+                        id="seconds">
+
+                        00
+
+                    </span>
+
+                    <span
+                        class="timer-label">
+
+                        SECONDES
+
+                    </span>
+
+                </div>
+
+
             </div>
 
 
-            <div
-                class="qr-text">
-
-                SCANNER POUR OUVRIR L'ITINÉRAIRE
-
-            </div>
-
-
-
-            <a
-                class="button"
-                href="https://maps.app.goo.gl/sv3XHXfLck6ukg2K6"
-                target="_blank"
-                rel="noopener">
-
-                📍 Ouvrir Google Maps
-
-            </a>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     NO PHOTOS
-========================================================= -->
-
-<section
-    class="no-photos"
-    id="privacy">
-
-
-    <div
-        class="no-photo-box">
-
-
-        <div
-            class="camera-icon"
-            aria-label="Interdiction de prendre des photos">
-
-
-            <svg
-                width="52"
-                height="52"
-                viewBox="0 0 64 64"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true">
-
-
-                <!-- CAMERA -->
-
-                <rect
-                    x="13"
-                    y="20"
-                    width="38"
-                    height="28"
-                    rx="5"
-                    stroke="currentColor"
-                    stroke-width="3.5"/>
-
-
-                <path
-                    d="M22 20L25 14H39L42 20"
-                    stroke="currentColor"
-                    stroke-width="3.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"/>
-
-
-                <circle
-                    cx="32"
-                    cy="34"
-                    r="8"
-                    stroke="currentColor"
-                    stroke-width="3.5"/>
-
-
-                <!-- NO PHOTOGRAPHY -->
-
-                <path
-                    d="M9 9L55 55"
-                    stroke="currentColor"
-                    stroke-width="4.5"
-                    stroke-linecap="round"/>
-
-
-            </svg>
-
         </div>
 
 
-        <h2>
-
-            Un petit geste, s'il vous plaît
-
-        </h2>
-
-
-        <div
-            class="no-photo-message">
-
-            Merci de ne pas prendre de photos
-
-        </div>
-
-
-        <div
-            class="no-photo-description">
-
-            Merci de respecter notre intimité et de profiter pleinement de ce beau moment avec nous.
-
-        </div>
-
-
-    </div>
-
-</section>
+    </section>
 
 
 
-<!-- =========================================================
-     RSVP
-========================================================= -->
+    <!-- =====================================================
+         VENUE
+    ====================================================== -->
 
-<section
-    class="rsvp"
-    id="rsvp">
-
-
-    <div
-        class="rsvp-content">
+    <section
+        class="venue"
+        id="venue">
 
 
         <h2
             class="section-title">
 
-            Confirmation de présence
+            Le lieu de la soirée
 
         </h2>
 
 
         <p
-            class="rsvp-text">
+            class="section-subtitle">
 
-            Votre présence nous fera très plaisir.
-            Merci de confirmer votre présence à notre soirée.
+            Nous vous attendons à La salle Lydia Cheraga
 
         </p>
 
 
 
-        <!-- ==========================================
-             RSVP FORM
-        =========================================== -->
-
-        <form
-            id="rsvpForm"
-            class="rsvp-form">
+        <div
+            class="venue-card">
 
 
-            <!-- NAME -->
+            <img
+                class="venue-image"
+                src="image4.png"
+                alt="La salle Lydia Cheraga">
+
 
             <div
-                class="form-group">
+                class="venue-details">
 
 
-                <label
-                    class="form-label"
-                    for="name">
+                <div
+                    class="venue-name">
 
-                    Votre nom
+                    La salle Lydia
 
-                </label>
+                </div>
 
 
-                <input
-                    class="form-input"
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Entrez votre nom"
-                    required>
+                <div
+                    class="venue-city">
+
+                    Cheraga
+
+                </div>
+
+
+
+                <div
+                    class="qr-container">
+
+                    <div
+                        id="qrcode">
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="qr-text">
+
+                    SCANNER POUR OUVRIR L'ITINÉRAIRE
+
+                </div>
+
+
+
+                <a
+                    class="button"
+                    href="https://maps.app.goo.gl/sv3XHXfLck6ukg2K6"
+                    target="_blank"
+                    rel="noopener">
+
+                    📍 Ouvrir Google Maps
+
+                </a>
+
 
             </div>
 
 
+        </div>
 
-            <!-- PRESENCE -->
+
+    </section>
+
+
+
+    <!-- =====================================================
+         NO PHOTOS
+    ====================================================== -->
+
+    <section
+        class="no-photos"
+        id="privacy">
+
+
+        <div
+            class="no-photo-box">
+
 
             <div
-                class="form-group">
+                class="camera-icon"
+                aria-label="Interdiction de prendre des photos">
 
 
-                <label
-                    class="form-label">
+                <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
 
-                    Votre présence
 
-                </label>
+                    <rect
+                        x="13"
+                        y="20"
+                        width="38"
+                        height="28"
+                        rx="5"
+                        stroke="currentColor"
+                        stroke-width="3.5"/>
+
+
+                    <path
+                        d="M22 20L25 14H39L42 20"
+                        stroke="currentColor"
+                        stroke-width="3.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+
+                    <circle
+                        cx="32"
+                        cy="34"
+                        r="8"
+                        stroke="currentColor"
+                        stroke-width="3.5"/>
+
+
+                    <path
+                        d="M9 9L55 55"
+                        stroke="currentColor"
+                        stroke-width="4.5"
+                        stroke-linecap="round"/>
+
+
+                </svg>
+
+
+            </div>
+
+
+            <h2>
+
+                Un petit geste, s'il vous plaît
+
+            </h2>
+
+
+            <div
+                class="no-photo-message">
+
+                Merci de ne pas prendre de photos
+
+            </div>
+
+
+            <div
+                class="no-photo-description">
+
+                Merci de respecter notre intimité et de profiter pleinement de ce beau moment avec nous.
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         NO CHILDREN
+    ====================================================== -->
+
+    <section
+        class="no-children"
+        id="noChildren">
+
+
+        <div
+            class="no-children-box">
+
+
+            <div
+                class="children-icon"
+                aria-label="Célébration réservée aux adultes">
+
+
+                <svg
+                    viewBox="0 0 64 64"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+
+
+                    <!-- ENFANT 1 -->
+
+                    <circle
+                        cx="24"
+                        cy="21"
+                        r="7"
+                        stroke="currentColor"
+                        stroke-width="3"/>
+
+
+                    <path
+                        d="M12 45C12 37.3 17.4 32 24 32C30.6 32 36 37.3 36 45"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"/>
+
+
+                    <!-- ENFANT 2 -->
+
+                    <circle
+                        cx="43"
+                        cy="25"
+                        r="5.5"
+                        stroke="currentColor"
+                        stroke-width="3"/>
+
+
+                    <path
+                        d="M34 45C34 38.7 38 34 43 34C48 34 52 38.7 52 45"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"/>
+
+
+                </svg>
+
+
+            </div>
+
+
+            <h2>
+
+                Une soirée entre adultes
+
+            </h2>
+
+
+            <div
+                class="no-children-message">
+
+                Pour cette occasion si particulière, nous souhaitons vous avoir pleinement à nos côtés. La célébration sera réservée aux adultes. Merci de votre compréhension.
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RSVP
+    ====================================================== -->
+
+    <section
+        class="rsvp"
+        id="rsvp">
+
+
+        <div
+            class="rsvp-content">
+
+
+            <h2
+                class="section-title">
+
+                Confirmation de présence
+
+            </h2>
+
+
+            <p
+                class="rsvp-text">
+
+                Votre présence nous fera très plaisir.
+                Merci de confirmer votre présence à notre soirée.
+
+            </p>
+
+
+
+            <form
+                id="rsvpForm"
+                class="rsvp-form">
 
 
                 <div
-                    class="presence-options">
+                    class="form-group">
+
+
+                    <label
+                        class="form-label"
+                        for="name">
+
+                        Votre nom
+
+                    </label>
+
+
+                    <input
+                        class="form-input"
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Entrez votre nom"
+                        required>
+
+
+                </div>
+
+
+
+                <div
+                    class="form-group">
+
+
+                    <label
+                        class="form-label">
+
+                        Votre présence
+
+                    </label>
 
 
                     <div
-                        class="presence-option">
-
-                        <input
-                            type="radio"
-                            id="present"
-                            name="presence"
-                            value="Présent(e)"
-                            required>
+                        class="presence-options">
 
 
-                        <label
-                            for="present">
-
-                            ✓ Je serai présent(e)
-
-                        </label>
-
-                    </div>
+                        <div
+                            class="presence-option">
 
 
-
-                    <div
-                        class="presence-option">
-
-                        <input
-                            type="radio"
-                            id="absent"
-                            name="presence"
-                            value="Absent(e)">
+                            <input
+                                type="radio"
+                                id="present"
+                                name="presence"
+                                value="Présent(e)"
+                                required>
 
 
-                        <label
-                            for="absent">
+                            <label
+                                for="present">
 
-                            Je ne pourrai pas être présent(e)
+                                ✓ Je serai présent(e)
 
-                        </label>
+                            </label>
+
+
+                        </div>
+
+
+
+                        <div
+                            class="presence-option">
+
+
+                            <input
+                                type="radio"
+                                id="absent"
+                                name="presence"
+                                value="Absent(e)">
+
+
+                            <label
+                                for="absent">
+
+                                Je ne pourrai pas être présent(e)
+
+                            </label>
+
+
+                        </div>
+
 
                     </div>
 
 
                 </div>
 
-            </div>
+
+
+                <div
+                    class="form-group">
+
+
+                    <label
+                        class="form-label"
+                        for="messageText">
+
+                        Un petit message
+
+                    </label>
+
+
+                    <textarea
+                        class="form-textarea"
+                        id="messageText"
+                        name="message"
+                        placeholder="Laissez un petit message..."></textarea>
+
+
+                </div>
 
 
 
-            <!-- MESSAGE -->
+                <button
+                    class="button submit-button"
+                    id="submitButton"
+                    type="submit">
 
-            <div
-                class="form-group">
+                    ✓ Confirmer ma présence
 
-
-                <label
-                    class="form-label"
-                    for="messageText">
-
-                    Un petit message
-
-                </label>
-
-
-                <textarea
-                    class="form-textarea"
-                    id="messageText"
-                    name="message"
-                    placeholder="Laissez un petit message..."></textarea>
-
-            </div>
+                </button>
 
 
 
-            <!-- SUBMIT -->
-
-            <button
-                class="button submit-button"
-                id="submitButton"
-                type="submit">
-
-                ✓ Confirmer ma présence
-
-            </button>
+                <div
+                    id="formStatus"
+                    class="form-status"
+                    aria-live="polite">
+                </div>
 
 
-            <!-- STATUS -->
-
-            <div
-                id="formStatus"
-                class="form-status"
-                aria-live="polite">
-            </div>
+            </form>
 
 
-        </form>
+        </div>
 
-    </div>
 
-</section>
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer
+        class="footer">
+
+        SANDRA · 10 SEPTEMBRE 2026
+
+    </footer>
+
+
+</div>
 
 
 
 <!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer
-    class="footer">
-
-    SANDRA · 10 SEPTEMBRE 2026
-
-</footer>
-
-
-
-<!-- =========================================================
-     QR CODE LIBRARY
+     QR CODE
 ========================================================= -->
 
 <script
@@ -2095,6 +2413,9 @@ textarea {
 const cover =
     document.getElementById("cover");
 
+const invitationContent =
+    document.getElementById("invitationContent");
+
 const music =
     document.getElementById("music");
 
@@ -2103,13 +2424,38 @@ const musicButton =
 
 
 /* =========================================================
-   OPEN INVITATION + MUSIC
+   OPEN INVITATION
 ========================================================= */
 
 cover.addEventListener(
     "click",
     function () {
 
+
+        /*
+           أولاً نفتح الصفحة.
+        */
+
+        document.documentElement
+            .classList
+            .remove("locked");
+
+        document.body
+            .classList
+            .remove("locked");
+
+
+        /*
+           إظهار بقية الدعوة.
+        */
+
+        invitationContent.style.display =
+            "block";
+
+
+        /*
+           تشغيل الموسيقى.
+        */
 
         music.play()
             .then(function () {
@@ -2132,11 +2478,16 @@ cover.addEventListener(
             });
 
 
+        /*
+           الانتقال مباشرة إلى الصورة الثانية.
+        */
+
         document
             .getElementById("message")
             .scrollIntoView({
                 behavior: "smooth"
             });
+
 
     }
 );
@@ -2183,6 +2534,7 @@ musicButton.addEventListener(
                 "🔇";
 
         }
+
 
     }
 );
@@ -2302,6 +2654,7 @@ function updateCountdown() {
 
 updateCountdown();
 
+
 setInterval(
     updateCountdown,
     1000
@@ -2371,12 +2724,6 @@ rsvpForm.addEventListener(
         event.preventDefault();
 
 
-        /*
-           قراءة البيانات
-           بنفس الأسماء التي يستخدمها
-           doPost في Google Apps Script.
-        */
-
         const name =
             document
                 .getElementById("name")
@@ -2399,8 +2746,6 @@ rsvpForm.addEventListener(
                 .trim();
 
 
-
-        /* التحقق */
 
         if (!name) {
 
@@ -2427,10 +2772,6 @@ rsvpForm.addEventListener(
 
 
 
-        /*
-           تجهيز البيانات.
-        */
-
         const data = {
 
             name:
@@ -2446,8 +2787,6 @@ rsvpForm.addEventListener(
 
 
 
-        /* حالة الإرسال */
-
         submitButton.disabled = true;
 
         submitButton.textContent =
@@ -2459,13 +2798,6 @@ rsvpForm.addEventListener(
 
         try {
 
-
-            /*
-               إرسال JSON إلى Google Apps Script.
-
-               mode:no-cors مهم لأن Google Apps Script
-               قد لا يسمح بقراءة استجابة CORS من المتصفح.
-            */
 
             await fetch(
                 SCRIPT_URL,
@@ -2490,23 +2822,11 @@ rsvpForm.addEventListener(
             );
 
 
-            /*
-               في حالة no-cors لا نستطيع قراءة
-               response.success من المتصفح.
-
-               وصول الطلب إلى Apps Script يعني
-               أنه تم إرساله.
-            */
-
             showStatus(
                 "Merci ! Votre confirmation a bien été envoyée. Nous avons hâte de vous retrouver.",
                 "success"
             );
 
-
-            /*
-               تنظيف النموذج.
-            */
 
             rsvpForm.reset();
 
@@ -2535,7 +2855,7 @@ rsvpForm.addEventListener(
 
 
 /* =========================================================
-   STATUS FUNCTIONS
+   STATUS
 ========================================================= */
 
 function showStatus(
